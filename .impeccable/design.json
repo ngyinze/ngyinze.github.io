@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-30T09:39:16Z",
+  "title": "Design System: Issac Ng — Developer",
+  "extensions": {
+    "shadows": [],
+    "motion": [
+      { "name": "map-node-state", "value": "background .22s, color .22s", "purpose": "Map-node hover and selected states; disabled for reduced motion." },
+      { "name": "orbit", "value": "25s linear infinite", "purpose": "Yellow point rotates around the map center; disabled for reduced motion." },
+      { "name": "anchor-scroll", "value": "smooth", "purpose": "Internal navigation; auto for reduced motion." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "(max-width: 700px)" },
+      { "name": "tablet", "value": "(max-width: 1100px) and (min-width: 701px)" },
+      { "name": "unbroken-display-lines", "value": "(min-width: 1101px)" },
+      { "name": "wide-page", "value": "(min-width: 1800px)" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary action link",
+      "kind": "button",
+      "refersTo": "primary-link",
+      "description": "Anchor to work with square corners, yellow fill, and white hover; shared visible focus treatment.",
+      "html": "<a class=\"ds-primary-link\" href=\"#work\">View my work<svg viewBox=\"0 0 48 48\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M9 24h29M27 13l11 11-11 11\"/></svg></a>",
+      "css": ".ds-primary-link{display:inline-flex;align-items:center;gap:28px;background:var(--yellow,#f5ff3b);color:var(--ink,#111827);font-family:Archivo,Arial,sans-serif;font-weight:900;text-decoration:none;padding:17px 26px;touch-action:manipulation}.ds-primary-link svg{width:24px;height:24px;flex-shrink:0}.ds-primary-link:hover{background:white}.ds-primary-link:focus-visible{outline:3px solid currentColor;outline-offset:6px}@media(max-width:700px){.ds-primary-link{padding:15px 20px;font-size:15px;gap:22px}}"
+    },
+    {
+      "name": "Area filter",
+      "kind": "chip",
+      "refersTo": "filter",
+      "description": "Native button. In React, selection filters projects, updates the status count, and synchronizes map nodes.",
+      "html": "<button class=\"ds-filter\" aria-pressed=\"false\">Desktop</button><button class=\"ds-filter\" aria-pressed=\"true\">All work</button>",
+      "css": ".ds-filter{border:0;cursor:pointer;font-family:Archivo,Arial,sans-serif;padding:11px 18px;color:var(--muted,#43506c);background:transparent;border-radius:5px;touch-action:manipulation}.ds-filter:hover{background:#d5e0f6;color:var(--ink,#111827)}.ds-filter[aria-pressed=true]{background:var(--ink,#111827);color:white}.ds-filter:focus-visible{outline:3px solid currentColor;outline-offset:6px}@media(max-width:700px){.ds-filter{padding:10px 11px;font-size:12px}}"
+    },
+    {
+      "name": "Circular map node",
+      "kind": "button",
+      "refersTo": "map-node",
+      "description": "45% of the square map; selecting its already selected area resets to All. Preview shows the resting style.",
+      "html": "<div class=\"ds-map\"><button class=\"ds-map-node\" aria-pressed=\"false\"><svg viewBox=\"0 0 48 48\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"7\" y=\"7\" width=\"34\" height=\"25\" rx=\"2\"/><path d=\"M18 40h12M24 32v8\"/></svg><strong>Desktop</strong><span>Apps that run locally</span></button></div>",
+      "css": ".ds-map{position:relative;width:100%;max-width:480px;aspect-ratio:1}.ds-map-node{position:absolute;top:0;left:27.5%;aspect-ratio:1;width:45%;border:1.5px solid var(--ink,#111827);border-radius:50%;background:var(--ice,#eaf0fb);color:var(--ink,#111827);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:14px;font-family:Archivo,Arial,sans-serif;cursor:pointer;transition:background .22s,color .22s;touch-action:manipulation}.ds-map-node svg{width:44px;height:44px;color:var(--blue,#2046c8);margin-bottom:10px}.ds-map-node strong{font-size:23px;font-weight:900;letter-spacing:-.03em}.ds-map-node span{font-size:12px;line-height:1.4;max-width:14ch;margin-top:6px}.ds-map-node:hover,.ds-map-node[aria-pressed=true]{background:var(--blue,#2046c8);color:white;border-color:var(--blue,#2046c8)}.ds-map-node:hover svg,.ds-map-node[aria-pressed=true] svg{color:var(--yellow,#f5ff3b)}.ds-map-node:focus-visible{outline:3px solid currentColor;outline-offset:6px}@media(max-width:1100px) and (min-width:701px){.ds-map-node{padding:8px}.ds-map-node strong{font-size:19px}.ds-map-node svg{width:34px;height:34px}.ds-map-node span{font-size:11px}}@media(max-width:700px){.ds-map{max-width:360px}.ds-map-node{padding:10px}.ds-map-node strong{font-size:21px}.ds-map-node svg{width:34px;height:34px;margin-bottom:5px}.ds-map-node span{font-size:11px}}@media(prefers-reduced-motion:reduce){.ds-map-node{transition:none}}"
+    },
+    {
+      "name": "Work disclosure",
+      "kind": "custom",
+      "description": "Native details/summary with a plus/minus indicator and muted expanded text.",
+      "html": "<details class=\"ds-details\"><summary>Behind the work</summary><p>Originally created by tv7. My fork is a place for ongoing improvements to an existing open-source application.</p></details>",
+      "css": ".ds-details{margin-top:20px;font-family:Archivo,Arial,sans-serif;font-size:14px;color:var(--ink,#111827)}.ds-details summary{display:inline-block;cursor:pointer;text-decoration:underline;text-underline-offset:4px;line-height:1.7;touch-action:manipulation}.ds-details summary::after{content:' +';margin-left:8px;color:var(--blue,#2046c8)}.ds-details[open] summary::after{content:' −'}.ds-details summary:focus-visible{outline:3px solid currentColor;outline-offset:6px}.ds-details p{margin:12px 0 0;max-width:60ch;color:var(--muted,#43506c);line-height:1.65}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Blue technical notebook",
+    "overview": "Saturated fields, heavy Archivo headings, precise outlined geometry, and small yellow points give the portfolio its character. Content remains plain and readable: generous project rows pair abstract diagrams with descriptions and expandable notes.",
+    "keyCharacteristics": [
+      "Cobalt and ice-blue fields with yellow actions and diagram markers.",
+      "Heavy, tightly spaced headings beside regular-weight body text.",
+      "Flat rectangles, circular controls, and thin dividing lines."
+    ],
+    "rules": [],
+    "dos": [
+      "Do keep real content and interactive controls in semantic HTML; use SVG for the decorative technical geometry.",
+      "Do retain visible keyboard focus, selected-state semantics, and the reduced-motion behavior."
+    ],
+    "donts": [
+      "Don't replace the abstract diagrams with fabricated product screenshots.",
+      "Don't add visual metrics or testimonials without real evidence."
+    ]
+  }
+}
