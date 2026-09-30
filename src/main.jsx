@@ -228,8 +228,8 @@ function App() {
       <div className="hero">
         <div className="hero-copy">
           <header>
-            <a className="brand" href="#top" aria-label="Issac Ng, back to top">
-              Issac Ng
+            <a className="brand" href="#top" aria-label="Isaac Ng, back to top">
+              Isaac Ng
               <span className="brand-dot" />
             </a>
             <nav aria-label="Main navigation">
@@ -247,7 +247,7 @@ function App() {
               <span>Thoughtfully built.</span>
             </h1>
             <p>
-              I’m Issac, a developer working across desktop apps, business
+              I’m Isaac, a developer working across desktop apps, business
               software, and tools for thinking.
             </p>
             <a className="primary-link" href="#work">
@@ -331,7 +331,7 @@ function App() {
             </h2>
             <div>
               <p>
-                I’m Issac Ng, also known as Ng Yin Ze. I enjoy working with
+                I’m Isaac Ng, also known as Ng Yin Ze. I enjoy working with
                 software that has a real job to do, whether that means a better
                 desktop experience or a more dependable data workflow.
               </p>
@@ -350,7 +350,7 @@ function App() {
       </main>
       <footer className="section-wrap">
         <p>
-          Issac Ng<span>Personal developer portfolio</span>
+          Isaac Ng<span>Personal developer portfolio</span>
         </p>
         <a href="#top">
           Back to top

@@ -1,4 +1,4 @@
-# Issac Ng's portfolio
+# Isaac Ng's portfolio
 
 A personal, non-commercial React SPA about desktop development, business software, and knowledge tools.
 
@@ -12,7 +12,7 @@ GitHub Actions builds `dist` and deploys it to GitHub Pages. In repository Setti
 
 The site uses hash anchors for navigation, so refreshes work on GitHub Pages without a router or server rewrite. Fonts are self-hosted under their included SIL Open Font License. The site has no analytics, contact backend, or public email.
 
-After the is-a.dev registration PR is merged, set the Pages custom domain to `issacng.is-a.dev` and enable HTTPS. Leave the default GitHub Pages URL active during review.
+After the is-a.dev registration PR is merged, set the Pages custom domain to `isaacng.is-a.dev` and enable HTTPS. Leave the default GitHub Pages URL active during review.
 
 Run the browser check against the preview server using a Playwright installation:
 

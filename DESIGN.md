@@ -1,5 +1,5 @@
 ---
-name: Issac Ng — Developer
+name: Isaac Ng — Developer
 description: A blue technical notebook for practical software and explorations.
 colors:
   blue: "#2046c8"
@@ -81,7 +81,7 @@ components:
     textColor: "{colors.white}"
 ---
 
-# Design System: Issac Ng — Developer
+# Design System: Isaac Ng — Developer
 
 ## Overview
 

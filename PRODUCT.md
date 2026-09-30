@@ -1,4 +1,4 @@
-# Issac Ng — developer portfolio
+# Isaac Ng — developer portfolio
 
 <!-- impeccable:product-schema 1 -->
 
@@ -20,7 +20,7 @@ A complete, non-commercial personal developer portfolio suitable for an is-a.dev
 
 ## Capabilities and Constraints
 
-Use the ngyinze GitHub account. Apply for issacng.is-a.dev. GitHub contact only, no public email. User will create the registration PR. Keep all work inside J:/is-a-dev. Desktop and mobile accessible navigation.
+Use the ngyinze GitHub account. Apply for isaacng.is-a.dev. GitHub contact only, no public email. User will create the registration PR. Keep all work inside J:/is-a-dev. Desktop and mobile accessible navigation.
 
 ## Evidence on Hand
 
@@ -28,4 +28,4 @@ Past chats establish work in Delphi accounting/payroll software and C++/Qt Orbit
 
 ## Brand Commitments
 
-Personal developer identity. Display name inferred as Issac Ng from requested domain; legal profile name Ng Yin Ze. No fabricated metrics, testimonials, or employment claims.
+Personal developer identity. Display name confirmed by user as Isaac Ng; legal profile name Ng Yin Ze. No fabricated metrics, testimonials, or employment claims.
