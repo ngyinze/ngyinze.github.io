@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-React SPA, GitHub Pages. User specified both.
+React SPA, Vercel hosting selected by the user. GitHub Pages remains an existing mirror.
 
 ## Users
 
