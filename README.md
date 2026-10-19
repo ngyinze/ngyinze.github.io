@@ -1,25 +1,30 @@
 # Isaac Ng's portfolio
 
-A personal, non-commercial React SPA about desktop development, business software, and knowledge tools.
+A personal, non-commercial React SPA about desktop development, business software, and knowledge tools. The folding workspace introduces three disciplines; a separate project collection carries the work.
 
 ```sh
 npm ci
 npm run dev
+npm run check
 npm run build
 ```
 
-Vercel imports this repository into the `isaacng` project and deploys `main` automatically using the Vite preset (`npm run build`, output `dist`). The live preview is https://isaacng.vercel.app/. The existing GitHub Actions workflow also builds `dist` and deploys a GitHub Pages mirror.
+## Add a project
 
-The site uses hash anchors for navigation, so refreshes work on GitHub Pages without a router or server rewrite. Fonts are self-hosted under their included SIL Open Font License. The site has no analytics, contact backend, or public email.
+Edit `src/projects.js` and add a record to `projects`. Use a unique, URL-safe `id`, a discipline from `areas`, and the same content fields as the existing entries. Titles, technologies, summaries, roles and notes are ordinary content. Only add public repository links when available. The first project in each discipline supplies the opening feature. Adding projects does not add faces to the 3D object.
 
-The production custom domain `isaacng.is-a.dev` is added to Vercel without a www redirect. The registration branch includes Vercel's assigned A record and `_vercel.isaacng` TXT verification record. Once the registration PR is merged, Vercel can verify DNS and issue HTTPS. Keep the `vercel.app` preview available during review.
+`npm run check` validates project content and tests combined filtering/search against a 120-entry collection. Browser interactions were separately checked in the in-app browser; see `design-qa.md`.
 
-Run the browser check against the preview server using a Playwright installation:
+## Interaction and accessibility
 
-```sh
-npm run preview
-# In another terminal, with Playwright available:
-npm run check
-```
+The Three.js scene loads separately from the text/UI bundle. Drag horizontally to turn/fold it, click a panel, or focus the canvas and use Left/Right/Home. The three ordinary discipline buttons offer the same content navigation. Vertical touch scrolling is retained. Reduced motion makes state changes immediate. The static generated poster and working HTML controls remain available when WebGL cannot initialize or its context is lost.
 
-If Playwright is bundled outside the project, set `PLAYWRIGHT_MODULE` to its absolute `index.mjs` path. This keeps browser tooling out of the deployed app's dependencies.
+Rendering pauses offscreen and in a hidden tab, reuses static shadow maps, and refreshes an idle visible scene at 4fps. The 3D chunk is about 138 KB gzip, separate from the initial UI. `public/assets/fold-fallback.png` is a generated fallback; provenance is documented beside it.
+
+No analytics, contact backend, public email, or fabricated employment metrics. Fonts are self-hosted under their included SIL Open Font License.
+
+## Hosting
+
+Vercel imports this repository into `isaacng` and deploys `main` with the Vite preset (`npm run build`, output `dist`). The custom domain is https://isaacng.is-a.dev/; the default URL is https://isaacng.vercel.app/. The existing Actions workflow also publishes a GitHub Pages mirror.
+
+Production updates are deployed from main after the build and browser checks pass. Hash anchors keep navigation and refreshes compatible with all three hosts.

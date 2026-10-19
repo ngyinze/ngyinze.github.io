@@ -12,7 +12,7 @@ React SPA, Vercel hosting selected by the user. GitHub Pages remains an existing
 
 ## Users
 
-People exploring the developer's work and interests.
+Recruiters, engineering reviewers, and people exploring the developer's work. Make disciplines, technologies, role, and public evidence easy to assess without using the 3D interaction.
 
 ## Product Purpose
 

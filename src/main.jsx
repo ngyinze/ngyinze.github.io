@@ -1,278 +1,168 @@
-import React, { useState } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import { createRoot } from "react-dom/client";
+import { flushSync } from "react-dom";
+import {
+  ArrowRightIcon,
+  ArrowUpRightIcon,
+  DesktopIcon,
+  DatabaseIcon,
+  FilesIcon,
+  ArrowClockwiseIcon,
+  MagnifyingGlassIcon,
+} from "@phosphor-icons/react";
+import { areas, projects, filterProjects, github } from "./projects";
 import "./style.css";
 
-const github = "https://github.com/ngyinze";
-const areas = ["Desktop", "Data", "Knowledge"];
-const projects = [
-  {
-    title: "Orbit",
-    area: "Desktop",
-    tech: "C++ / Qt 6 / QML",
-    status: "An independently maintained fork",
-    description:
-      "One native Windows library for games installed across Steam, Epic, GOG, and Xbox. I work on this fork to explore desktop interfaces and improve the everyday experience.",
-    note: "Originally created by tv7. My fork is a place for ongoing improvements to an existing open-source application.",
-    href: `${github}/Orbit`,
-  },
-  {
-    title: "Business software",
-    area: "Data",
-    tech: "Delphi / SQL",
-    status: "An area of professional work",
-    description:
-      "Accounting and payroll software is full of details that have to be right. My work includes data imports, validation, database connections, and tracing bugs through existing systems.",
-    note: "I enjoy following a problem from the interface to the underlying data, fixing the shared cause, and checking the surrounding behavior.",
-  },
-  {
-    title: "A second brain",
-    area: "Knowledge",
-    tech: "Obsidian / Linked notes / AI retrieval",
-    status: "An ongoing exploration",
-    description:
-      "Exploring a personal knowledge system where sources become connected notes, and an AI assistant can follow those connections to answer questions with evidence.",
-    note: "The idea: keep durable knowledge in Obsidian, connect notes back to their sources, and use natural language as another way to explore them. This is an exploration, not a released product.",
-  },
-];
+const FoldingModel = lazy(() => import("./FoldingModel"));
+const icons = {
+  Desktop: DesktopIcon,
+  Data: DatabaseIcon,
+  Knowledge: FilesIcon,
+};
 
-function Icon({ name, ...props }) {
+function ModelPoster() {
   return (
-    <svg
-      viewBox="0 0 48 48"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      {name === "Desktop" && (
-        <>
-          <rect x="7" y="7" width="34" height="25" rx="2" />
-          <path d="M18 40h12M24 32v8" />
-        </>
-      )}
-      {name === "Data" && (
-        <>
-          <ellipse cx="24" cy="10" rx="15" ry="6" />
-          <path d="M9 10v25c0 8 30 8 30 0V10M9 22c0 8 30 8 30 0M9 32c0 8 30 8 30 0" />
-        </>
-      )}
-      {name === "Knowledge" && (
-        <>
-          <path d="M12 5h17l8 8v30H12zM29 5v9h8M19 22h12M19 28h12M19 34h8" />
-        </>
-      )}
-      {name === "arrow" && <path d="M9 24h29M27 13l11 11-11 11" />}
-      {name === "external" && <path d="M12 36 36 12M14 12h22v22" />}
-    </svg>
-  );
-}
-
-function WorkMap({ selected, onSelect }) {
-  return (
-    <div className="work-map" aria-label="Explore areas of my work">
-      <svg
-        className="map-lines"
-        viewBox="0 0 460 460"
-        fill="none"
-        aria-hidden="true"
-      >
-        <circle cx="230" cy="230" r="166" stroke="currentColor" />
-        <circle
-          cx="230"
-          cy="230"
-          r="130"
-          stroke="currentColor"
-          strokeDasharray="4 7"
-        />
-        <path
-          d="M230 18v424M18 230h424M230 90 87 320h286Z"
-          stroke="currentColor"
-          strokeDasharray="4 7"
-        />
-        <circle className="orbit-dot" cx="379" cy="154" r="6" />
-        <circle
-          cx="230"
-          cy="230"
-          r="7"
-          fill="var(--yellow)"
-          stroke="currentColor"
-        />
-        <circle cx="90" cy="140" r="5" fill="var(--blue)" />
-        <circle cx="288" cy="388" r="5" fill="var(--blue)" />
-      </svg>
-      {areas.map((area) => (
-        <button
-          key={area}
-          className={`map-node node-${area.toLowerCase()}`}
-          aria-pressed={selected === area}
-          onClick={() => onSelect(selected === area ? "All" : area)}
-        >
-          <Icon name={area} />
-          <strong>{area}</strong>
-          <span>
-            {area === "Desktop"
-              ? "Apps that run locally"
-              : area === "Data"
-                ? "Reliable business workflows"
-                : "Tools for thinking"}
-          </span>
-        </button>
-      ))}
-    </div>
-  );
-}
-
-function ProjectGraphic({ area }) {
-  return (
-    <div
-      className={`project-graphic graphic-${area.toLowerCase()}`}
-      aria-hidden="true"
-    >
-      <svg
-        viewBox="0 0 400 230"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      >
-        {area === "Desktop" && (
-          <>
-            <ellipse
-              cx="200"
-              cy="115"
-              rx="154"
-              ry="63"
-              transform="rotate(-22 200 115)"
-            />
-            <ellipse
-              cx="200"
-              cy="115"
-              rx="154"
-              ry="63"
-              transform="rotate(22 200 115)"
-              strokeDasharray="3 5"
-            />
-            <circle cx="200" cy="115" r="71" />
-            <path d="M200 20v190M100 115h200" />
-            <circle
-              cx="200"
-              cy="115"
-              r="8"
-              fill="var(--yellow)"
-              stroke="none"
-            />
-            <circle cx="59" cy="145" r="5" fill="currentColor" />
-            <circle cx="340" cy="87" r="5" fill="currentColor" />
-          </>
-        )}
-        {area === "Data" && (
-          <>
-            <rect x="126" y="36" width="227" height="158" rx="3" />
-            <path d="M126 74h227M126 114h227M126 154h227M214 36v158M284 36v158M40 94h61l-9-9M101 94l-9 9M40 134h61l-9-9M101 134l-9 9" />
-            <path d="M144 56h50M144 94h41M144 134h34M144 174h53M232 94h33M232 134h23M232 174h33" />
-            <rect
-              x="296"
-              y="126"
-              width="42"
-              height="14"
-              fill="var(--yellow)"
-              stroke="none"
-            />
-          </>
-        )}
-        {area === "Knowledge" && (
-          <>
-            <path d="M72 60 193 115 72 172M193 115l128-57M193 115l128 57" />
-            <circle cx="193" cy="115" r="34" />
-            <circle cx="72" cy="60" r="19" />
-            <circle cx="72" cy="172" r="19" />
-            <circle cx="321" cy="58" r="19" />
-            <circle cx="321" cy="172" r="19" />
-            <circle
-              cx="193"
-              cy="115"
-              r="8"
-              fill="var(--yellow)"
-              stroke="none"
-            />
-            <path
-              d="M186 64V32M186 32l-5 5M186 32l5 5M72 83v66M321 82v67"
-              strokeDasharray="4 5"
-            />
-          </>
-        )}
-      </svg>
-      <span>
-        {area === "Desktop"
-          ? "A library, brought together."
-          : area === "Data"
-            ? "Details that add up."
-            : "Sources → notes → understanding."}
-      </span>
-    </div>
+    <img
+      className="model-poster"
+      src="/assets/fold-fallback.png"
+      alt="Three cobalt panels joined by yellow hinges, folded into a sculptural workspace."
+      width="1466"
+      height="1073"
+    />
   );
 }
 
 function App() {
-  const [selected, setSelected] = useState("All");
-  const visibleProjects = projects.filter(
-    (project) => selected === "All" || project.area === selected,
-  );
+  const [activeArea, setActiveArea] = useState("Desktop");
+  const [area, setArea] = useState("All");
+  const [query, setQuery] = useState("");
+  const [reset, setReset] = useState(0);
+  const [sceneStatus, setSceneStatus] = useState("loading");
+  const visible = filterProjects(projects, area, query);
+  const featured = projects.find((project) => project.area === activeArea);
+  function explore() {
+    flushSync(() => {
+      setArea(activeArea);
+      setQuery("");
+    });
+  }
+  function allWork() {
+    setArea("All");
+    setQuery("");
+  }
+
   return (
     <>
       <a className="skip-link" href="#work">
         Skip to work
       </a>
-      <div className="hero">
-        <div className="hero-copy">
-          <header>
-            <a className="brand" href="#top" aria-label="Isaac Ng, back to top">
-              Isaac Ng
-              <span className="brand-dot" />
-            </a>
-            <nav aria-label="Main navigation">
-              <a href="#work">Work</a>
-              <a href="#about">About</a>
-              <a href={github}>
-                GitHub
-                <Icon name="external" />
-              </a>
-            </nav>
-          </header>
-          <div className="introduction" id="top">
-            <h1>
-              <span>Useful software.</span>
-              <span>Thoughtfully built.</span>
+      <header className="site-header page-wrap" id="top">
+        <a className="brand" href="#top" aria-label="Isaac Ng, back to top">
+          Isaac Ng
+          <span className="brand-dot" />
+        </a>
+        <nav aria-label="Main navigation">
+          <a href="#work" onClick={allWork}>
+            Work
+          </a>
+          <a href="#about">About</a>
+          <a href={github}>
+            GitHub <ArrowUpRightIcon aria-hidden="true" />
+          </a>
+        </nav>
+      </header>
+      <main>
+        <section className="hero page-wrap" aria-labelledby="hero-title">
+          <div className="hero-intro">
+            <h1 id="hero-title">
+              A different side<span>of my work.</span>
             </h1>
             <p>
-              I’m Isaac, a developer working across desktop apps, business
-              software, and tools for thinking.
-            </p>
-            <a className="primary-link" href="#work">
-              View my work
-              <Icon name="arrow" />
-            </a>
-            <p className="hero-footnote">
-              A little of what I build. A little of how I think.
+              I’m Isaac. I build desktop apps, work with data, and explore tools
+              for thinking.
             </p>
           </div>
-        </div>
-        <aside className="hero-map">
-          <WorkMap selected={selected} onSelect={setSelected} />
-          <p>Select an area to explore the work below.</p>
-        </aside>
-      </div>
-      <main>
+          <figure className="hero-object">
+            <div className="model-stage">
+              <Suspense fallback={<ModelPoster />}>
+                <FoldingModel
+                  selected={activeArea}
+                  onSelect={setActiveArea}
+                  onStatus={setSceneStatus}
+                  reset={reset}
+                />
+              </Suspense>
+            </div>
+            <figcaption id="model-instructions">
+              {sceneStatus === "unavailable"
+                ? "Choose a discipline to explore my work."
+                : "Drag to turn. Choose a side to unfold."}
+            </figcaption>
+            <div
+              className="area-controls"
+              role="group"
+              aria-label="Explore a discipline"
+            >
+              {areas.map((item) => {
+                const Icon = icons[item];
+                return (
+                  <button
+                    key={item}
+                    aria-pressed={activeArea === item}
+                    onClick={() => setActiveArea(item)}
+                  >
+                    <Icon size={24} weight="light" aria-hidden="true" />
+                    {item}
+                  </button>
+                );
+              })}
+            </div>
+            {sceneStatus !== "unavailable" && (
+              <button
+                disabled={sceneStatus !== "ready"}
+                className="reset-view"
+                onClick={() => {
+                  setReset((v) => v + 1);
+                  setActiveArea("Desktop");
+                }}
+              >
+                <ArrowClockwiseIcon size={16} aria-hidden="true" />
+                Reset view
+              </button>
+            )}
+          </figure>
+          <div className="hero-feature" aria-live="polite" aria-atomic="true">
+            <h2>{featured.title}</h2>
+            <div className="feature-meta">
+              <span>{featured.area}</span>
+              <span>{featured.kind}</span>
+            </div>
+            <p>{featured.hero}</p>
+            <a
+              className="primary-link"
+              href={"#" + featured.id}
+              onClick={explore}
+            >
+              {featured.action}
+              <ArrowRightIcon size={23} aria-hidden="true" />
+            </a>
+            <a className="all-work" href="#work" onClick={allWork}>
+              View all work
+              <ArrowRightIcon size={19} aria-hidden="true" />
+            </a>
+          </div>
+        </section>
         <section
-          className="work section-wrap"
+          className="work page-wrap"
           id="work"
           aria-labelledby="work-title"
         >
           <div className="section-heading">
-            <h2 id="work-title">Work &amp; explorations</h2>
-            <p>Projects, practice, and ideas in progress.</p>
+            <h2 id="work-title">Work, with context.</h2>
+            <p>
+              What I work on, how I approach it,
+              <br className="desktop-break" /> and where I’m still exploring.
+            </p>
           </div>
           <div className="work-toolbar">
             <div
@@ -280,85 +170,117 @@ function App() {
               role="group"
               aria-label="Filter work by area"
             >
-              {["All", ...areas].map((area) => (
+              {["All", ...areas].map((item) => (
                 <button
-                  key={area}
-                  aria-pressed={selected === area}
-                  onClick={() => setSelected(area)}
+                  key={item}
+                  aria-pressed={area === item}
+                  onClick={() => setArea(item)}
                 >
-                  {area === "All" ? "All work" : area}
+                  {item === "All" ? "All work" : item}
                 </button>
               ))}
             </div>
-            <p className="result-count" role="status">
-              {visibleProjects.length}{" "}
-              {visibleProjects.length === 1 ? "entry" : "entries"}
-            </p>
+            <label className="search">
+              <MagnifyingGlassIcon size={20} aria-hidden="true" />
+              <span className="sr-only">Search projects</span>
+              <input
+                type="search"
+                placeholder="Find a project or skill"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+            </label>
           </div>
+          <p className="result-count" role="status">
+            {visible.length} {visible.length === 1 ? "entry" : "entries"}
+          </p>
           <div className="projects">
-            {visibleProjects.map((project) => (
-              <article className="project" key={project.title}>
-                <ProjectGraphic area={project.area} />
-                <div className="project-copy">
-                  <div className="project-title">
-                    <h3>{project.title}</h3>
-                    <span>{project.area}</span>
-                  </div>
-                  <p className="project-tech">{project.tech}</p>
-                  <p>{project.description}</p>
-                  <p className="project-status">{project.status}</p>
-                  <details>
-                    <summary>Behind the work</summary>
-                    <p>{project.note}</p>
-                  </details>
+            {visible.map((project) => (
+              <article className="project" id={project.id} key={project.id}>
+                <div className="project-heading">
+                  <h3>{project.title}</h3>
+                  <p className="project-kind">{project.kind}</p>
+                  <ul className="technologies" aria-label="Technologies">
+                    {project.tech.map((tech) => (
+                      <li key={tech}>{tech}</li>
+                    ))}
+                  </ul>
                   {project.href && (
-                    <a className="text-link" href={project.href}>
+                    <a className="repository-link" href={project.href}>
                       View repository
-                      <Icon name="external" />
+                      <ArrowUpRightIcon size={18} aria-hidden="true" />
                     </a>
                   )}
                 </div>
+                <div className="project-body">
+                  <p className="project-summary">{project.summary}</p>
+                  <p>{project.description}</p>
+                  <dl>
+                    <div>
+                      <dt>My role</dt>
+                      <dd>{project.role}</dd>
+                    </div>
+                    <div>
+                      <dt>Focus</dt>
+                      <dd>{project.focus}</dd>
+                    </div>
+                  </dl>
+                  <details>
+                    <summary>Behind the work</summary>
+                    <div className="project-details">
+                      <h4>How I approach it</h4>
+                      <p>{project.approach}</p>
+                      <p className="project-note">{project.note}</p>
+                    </div>
+                  </details>
+                </div>
               </article>
             ))}
+            {visible.length === 0 && (
+              <div className="empty-state">
+                <h3>No matching work yet.</h3>
+                <p>Try another skill or browse the full collection.</p>
+                <button className="text-button" onClick={allWork}>
+                  Show all work <ArrowRightIcon aria-hidden="true" />
+                </button>
+              </div>
+            )}
           </div>
         </section>
         <section className="about" id="about" aria-labelledby="about-title">
-          <div className="section-wrap about-grid">
+          <div className="page-wrap about-grid">
             <h2 id="about-title">
-              Understand the system.
-              <br />
-              Then make it simpler.
+              Understand the system.<span>Then make it simpler.</span>
             </h2>
             <div>
               <p>
-                I’m Isaac Ng, also known as Ng Yin Ze. I enjoy working with
-                software that has a real job to do, whether that means a better
-                desktop experience or a more dependable data workflow.
+                I’m Isaac Ng, also known as Ng Yin Ze. I enjoy software with a
+                real job to do: a better desktop experience, a dependable data
+                workflow, or a useful way to connect ideas.
               </p>
               <p>
-                My interests connect practical development with learning: native
-                applications, existing codebases, and knowledge systems that
-                make ideas easier to find and use.
+                I work across existing codebases, follow problems to their
+                cause, and care about the details that make software reliable.
               </p>
               <a className="contact-link" href={github}>
-                Find me on GitHub
-                <Icon name="external" />
+                Let’s connect on GitHub
+                <ArrowUpRightIcon size={22} aria-hidden="true" />
               </a>
             </div>
           </div>
         </section>
       </main>
-      <footer className="section-wrap">
+      <footer className="page-wrap">
         <p>
-          Isaac Ng<span>Personal developer portfolio</span>
+          <strong>Isaac Ng</strong>
+          <span>Desktop software. Data. Tools for thinking.</span>
         </p>
         <a href="#top">
           Back to top
-          <Icon name="arrow" />
+          <ArrowUpRightIcon size={19} aria-hidden="true" />
         </a>
       </footer>
     </>
   );
 }
-
 createRoot(document.getElementById("root")).render(<App />);

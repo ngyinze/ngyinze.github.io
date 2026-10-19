@@ -1,146 +1,165 @@
 ---
-name: Isaac Ng — Developer
-description: A blue technical notebook for practical software and explorations.
+name: Isaac Ng — Folding Workspace
+description: A tactile three-dimensional introduction with a clear portfolio of practical software work.
 colors:
   blue: "#2046c8"
   ice: "#eaf0fb"
   ink: "#111827"
   yellow: "#f5ff3b"
-  muted: "#43506c"
-  line: "#bac8e4"
+  muted: "#435675"
+  line: "#bdcbe3"
+  control-rest: "#dfe7f6"
+  control-hover: "#d0ddf4"
+  about-body: "#edf2ff"
   white: "white"
-  blue-body: "#f1f5ff"
-  blue-footnote: "#e1eaff"
-  filter-hover: "#d5e0f6"
-  graphic-data: "#dce6fa"
-  graphic-knowledge: "#dfe5f3"
 typography:
   display:
     fontFamily: "Archivo, Arial, sans-serif"
-    fontSize: "clamp(3rem, 6.1vw, 6rem)"
+    fontSize: "clamp(40px, 4.5vw, 72px)"
     fontWeight: 900
-    lineHeight: 1.02
-    letterSpacing: "-.035em"
+    lineHeight: 1.06
+    letterSpacing: "-0.035em"
   headline:
     fontFamily: "Archivo, Arial, sans-serif"
-    fontSize: "clamp(32px, 3.7vw, 54px)"
+    fontSize: "clamp(36px, 4vw, 56px)"
     fontWeight: 900
     lineHeight: 1.1
-    letterSpacing: "-.035em"
-  title:
+    letterSpacing: "-0.035em"
+  project-title:
     fontFamily: "Archivo, Arial, sans-serif"
-    fontSize: "35px"
+    fontSize: "38px"
     fontWeight: 900
-    lineHeight: 1.2
-    letterSpacing: "-.035em"
+    lineHeight: 1.15
+    letterSpacing: "-0.035em"
+  project-summary:
+    fontFamily: "Archivo, Arial, sans-serif"
+    fontSize: "23px"
+    fontWeight: 400
+    lineHeight: 1.4
+    letterSpacing: "-0.015em"
   body:
     fontFamily: "Archivo, Arial, sans-serif"
-    fontSize: "16px"
+    fontSize: "15px"
     fontWeight: 400
     lineHeight: 1.65
   label:
     fontFamily: "Archivo, Arial, sans-serif"
-    fontSize: "13px"
+    fontSize: "12px"
     fontWeight: 400
-    lineHeight: 1.65
 rounded:
   filter: "5px"
-  circle: "50%"
+  discipline: "40px"
+  brand-dot: "50%"
 spacing:
   filter-gap: "8px"
-  text-gap: "18px"
-  section-gutter-mobile: "24px"
-  project-gap: "48px"
+  discipline-gap: "10px"
+  action-gap: "28px"
+  page-gutter: "56px"
+  page-gutter-tablet: "32px"
+  page-gutter-mobile: "20px"
 components:
   primary-link:
     backgroundColor: "{colors.yellow}"
     textColor: "{colors.ink}"
-    padding: "17px 26px"
+    padding: "17px 24px"
   primary-link-hover:
-    backgroundColor: "{colors.white}"
-  contact-link:
-    backgroundColor: "{colors.yellow}"
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.white}"
+  discipline:
+    backgroundColor: "{colors.control-rest}"
     textColor: "{colors.ink}"
-    padding: "14px 20px"
+    rounded: "{rounded.discipline}"
+    padding: "14px 22px"
+  discipline-selected:
+    backgroundColor: "{colors.blue}"
+    textColor: "{colors.white}"
   filter:
     backgroundColor: "transparent"
     textColor: "{colors.muted}"
     rounded: "{rounded.filter}"
-    padding: "11px 18px"
+    padding: "11px 17px"
   filter-selected:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.white}"
-  map-node:
-    backgroundColor: "{colors.ice}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.circle}"
-    padding: "14px"
-    width: "45%"
-  map-node-selected:
-    backgroundColor: "{colors.blue}"
-    textColor: "{colors.white}"
 ---
 
-# Design System: Isaac Ng — Developer
+# Design System: Isaac Ng — Folding Workspace
 
 ## Overview
 
-**Creative North Star: "Blue technical notebook"**
+**Creative North Star: "Folding Workspace"**
 
-Saturated fields, heavy Archivo headings, precise outlined geometry, and small yellow points give the portfolio its character. Content remains plain and readable: generous project rows pair abstract diagrams with descriptions and expandable notes.
+A physical folding workspace introduces Isaac's desktop, data, and knowledge interests. Cobalt panels and yellow hinges provide the memorable object; heavy Archivo headings and a pale ice surface keep the surrounding interface clear. The direction is the user's selected third generated concept, carried into real interactive Three.js geometry.
+
+Recruiters can read the selected work, role, technologies, approach, and public evidence without manipulating the model. The project collection stays independent of the three discipline faces so new entries add useful evidence without expanding the sculpture.
 
 **Key Characteristics:**
 
-- Cobalt and ice-blue fields with yellow actions and diagram markers.
-- Heavy, tightly spaced headings beside regular-weight body text.
-- Flat rectangles, circular controls, and thin dividing lines.
+- Cobalt three-panel sculpture on a pale ice ground, with yellow edges and hinges.
+- Heavy, tightly tracked Archivo headings above quieter factual metadata.
+- Flat, divided project rows with readable role and technology information.
+- Direct manipulation in the hero; immediate, semantic controls throughout.
 
 ## Colors
 
 ### Primary
 
-Cobalt blue anchors the introduction and about section; it also colors technology labels, links, outlines, and selected map nodes. Electric yellow marks primary actions and small points in the diagrams.
+Cobalt (`blue`) colors the physical panels, selected discipline, technology labels, and full-width About field. Its pale ice counterpart is the continuous page surface.
+
+### Secondary
+
+Electric yellow (`yellow`) belongs to the sculpture's thin edges and hinge pins, primary actions, the small brand dot, and text selection. Keep it purposeful and readable with ink text.
 
 ### Neutral
 
-Ice is the page and resting map-node surface. Ink supplies text and selected filters; muted blue-gray supplies supporting text. The line color divides projects. White and the two pale text colors support content on cobalt. Data and knowledge graphics use their own pale blue fields; filters have a pale hover fill.
+Ink supplies primary copy and selected archive filters. Muted blue-gray supports descriptions and factual metadata. The line color provides thin dividers; control-rest and control-hover distinguish discipline buttons. White supplies text on cobalt and ink. About body copy uses about-body.
 
 ## Typography
 
-Archivo is locally served in regular (400) and black (900), with Arial and sans-serif fallbacks. Headings use the display, headline, and title roles above; all balance text. The introduction uses larger body text (21px, line-height 1.55, maximum 53ch). Project descriptions use the body role with a maximum of 60ch; about copy stops at 58ch. Brand lettering is heavy (27px, letter-spacing -.025em); map titles are heavy (23px, -.03em).
+Self-hosted Archivo Regular (400) and Archivo Black (900), with Arial/sans-serif fallback and font synthesis disabled. The compressed heavy hierarchy supplies character; regular body text carries the evidence.
 
-The about heading uses its own fluid size (clamp(34px, 3.8vw, 55px), line-height 1.12). Supporting labels range from 12px to 14px. Responsive overrides are documented below rather than represented as a second token scale.
+The desktop hero display uses the frontmatter display role. The featured title uses `clamp(35px, 3.5vw, 56px)` at 1.1 line-height. Archive headings use the headline role; project titles use project-title. Introductory copy is 20px/1.6, project summaries 23px/1.4, project explanations 15px/1.65, and metadata 12–14px. Descriptions remain around 68ch maximum; compact summaries are around 38–45ch.
+
+At 1100px and below the hero display becomes `clamp(36px, 4.5vw, 50px)` and intro copy 17px. At 760px and below the display is `clamp(35px, 8.3vw, 56px)`, project titles 32px, and project summaries 21px. Project titles and featured titles precede their factual classification labels.
 
 ## Layout
 
-The desktop hero uses a 64%/36% split and a maximum width of 1800px. Content sections use a centered container (maximum 1280px, viewport minus 96px). Work rows use a 42% graphic column and flexible copy column, separated by 48px. About uses equal columns with a 70px gap. Work section padding is 64px above and 72px below; about uses 70px vertically.
+The centered page wrapper is `calc(100% - 112px)` with a 1440px maximum. Desktop hero composition is 60% sculpture / 40% introduction and featured project, with a 760px minimum height. The model stage is 490px high. At 1600px and above the hero minimum is 850px and model stage 550px.
 
-At 701–1100px, the hero becomes 60%/40%, content gutters become 32px, project gaps become 30px, and section headings stack. The display becomes clamp(48px, 6.7vw, 72px).
+At 1100px and below the page gutters become 32px, the hero columns 56% / 44%, and the model stage 420px. At 760px and below gutters become 20px and the hero stacks introduction, model, then featured work; the stage is 320px high. At 360px and below it is 275px. Preserve the entire sculpture using camera framing rather than cropping it.
 
-At 700px and below, hero, project rows, and about stack into single columns. Gutters become 24px; the map is capped at 360px. All navigation links and map nodes remain visible, while navigation icons disappear. Display size becomes clamp(42px, 10.6vw, 64px) with line-height 1.04; section titles become 36px, project titles 30px, and about heading 37px. Project body text becomes 15px. Work padding becomes 38px/40px; about uses 44px vertically. Filters wrap, with smaller padding (10px 11px).
-
-Above 1100px, each display line stays unbroken. At 1800px and above, the outer page changes to the data-graphic blue and main/footer are capped at 1800px.
+The work toolbar pairs wrapping filters with an underlined search field. Project rows use 35% / remaining-width columns with an 8% column gap, a top divider, and 44px/50px block padding. On mobile the toolbar and project rows stack, with 26px between heading and body. About uses two columns on desktop and one on mobile. This is a continuous document of divided rows, not a grid of boxed cards.
 
 ## Elevation & Depth
 
-There are no shadows. Depth comes from saturated and pale fields, thin project dividers, overlapping circular map geometry, and foreground diagram points.
+Interface elements remain flat: there are no CSS box-shadow tokens. Depth belongs to the Three.js sculpture, whose rounded thick panels use physical lighting, a room environment, yellow inserts, embossed discipline motifs, and a soft contact-shadow plane. The generated transparent poster is reserved for loading or unavailable WebGL. Do not turn the sculpture into a static replacement for supported visitors.
 
 ## Shapes
 
-Action links and graphic panels have square corners. Filter controls use the small rounded token; map controls and brand points are circles. Map nodes have a thin outline (1.5px); project rows use a single top divider (1px). SVG illustrations use thin lines, dashed orbits, and small filled markers.
+Square-corner yellow action links contrast with 40px-radius discipline pills and compact 5px-radius archive filters. Thin dividers structure the page without enclosing each project. The only interface circle is the small brand dot. In the scene, three thick rounded rectangles form a hinged concertina; they represent disciplines rather than individual projects.
 
 ## Components
 
-- **Action links:** Yellow rectangles with ink text, black-weight labels, and outlined arrow icons. Hover turns the background white. The primary action scrolls to work; contact goes to GitHub.
-- **Map:** Three circular buttons surround outlined orbital geometry. Hover and selection turn a node cobalt with white text and a yellow icon. Nodes and filters share the same selected area; selecting an already selected node resets to All. Node background/text transition over .22s. A yellow orbit point rotates over 25s, linearly and continuously.
-- **Filters:** Transparent, muted controls become ink with white text when selected. Hover uses the pale fill. Selection filters the project rows and updates a status count; selected state is exposed through `aria-pressed`.
-- **Project rows:** Flat graphic/copy pairs with top dividers. Illustrations are decorative. Each row has a native disclosure labeled “Behind the work”; its plus changes to a minus when open. Only a project with a repository URL gets the repository link.
-- **Navigation:** Inline text links; hover underlines them. Internal anchors use smooth scrolling with 24px scroll padding. The footer returns to the introduction.
-- **Keyboard access:** Buttons, links, and summaries share a current-color focus outline (3px, offset 6px). The skip link sits offscreen until focused, then appears at the upper left. Reduced-motion preferences disable smooth scrolling, orbit animation, and map-node transitions.
+- **Primary/contact action:** yellow with ink text, Archivo Black 15px, `17px 24px` padding, and a 54px minimum height. Hover becomes ink with white text. Arrow icons clarify direction.
+- **Discipline controls:** native buttons with light icons, 52px minimum height on desktop (47px on mobile), a pale resting surface, and cobalt/white selection. Selection changes the featured work and physical fold; it does not filter the archive until the project action is used.
+- **Folding model:** horizontal drag turns and folds the geometry; panel clicks and Left/Right/Home keys select disciplines. Reset returns to Desktop. Reduced motion makes transitions immediate and removes idle refresh. Visible idle refresh is 4fps; hidden/offscreen rendering stops. An unavailable model shows the poster, button-based navigation, matching instruction text, and no Reset control.
+- **Archive filters/search:** four area choices, combined with case-insensitive project/skill search. Result count uses a polite status region. Empty results offer a Show all work reset. Archive selection stays independent of the hero.
+- **Project row:** title, kind, technology list and public repository link beside summary, explanation, role and focus. Native Behind the work disclosure contains approach and provenance. Never replace the evidence with decorative animation.
+- **Navigation:** compact Work, About, and GitHub links; brand returns to top. A keyboard skip link jumps directly to work. Anchors scroll immediately rather than using a staged reveal.
+- **Focus:** 3px cobalt outlines with 5px offset on interactive controls, including the canvas. Focus on About links is white against cobalt. Preserve `aria-pressed`, semantic headings, native disclosures, and the live featured summary.
 
 ## Do's and Don'ts
 
-- **Do** keep real content and interactive controls in semantic HTML; use SVG for the decorative technical geometry.
-- **Do** retain visible keyboard focus, selected-state semantics, and the reduced-motion behavior.
-- **Don't** replace the abstract diagrams with fabricated product screenshots.
-- **Don't** add visual metrics or testimonials without real evidence.
+### Do:
+
+- Do keep project titles above classification metadata, and make role, technologies, and evidence easy to find.
+- Do keep the three disciplines stable while adding projects to the independent searchable collection.
+- Do preserve native links, buttons, disclosures, visible keyboard focus, and the unavailable-model fallback.
+- Do use real project provenance and distinguish professional practice, maintained forks, and ongoing explorations.
+
+### Don't:
+
+- Don't gate portfolio content or contact behind the 3D interaction.
+- Don't add generic scroll reveals or delayed text entrances.
+- Don't fabricate metrics, testimonials, employment details, product screenshots, or a resume download.
+- Don't expose company source, internal issues, private repositories, or a public email address.

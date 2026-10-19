@@ -1,93 +1,25 @@
 import assert from "node:assert/strict";
-import { pathToFileURL } from "node:url";
-import { mkdir } from "node:fs/promises";
+import { areas, projects, filterProjects } from "../src/projects.js";
 
-const { chromium } = await import(
-  process.env.PLAYWRIGHT_MODULE
-    ? pathToFileURL(process.env.PLAYWRIGHT_MODULE).href
-    : "playwright"
-);
-const browser = await chromium.launch({ headless: true, channel: "chrome" });
-const url = process.env.CHECK_URL || "http://127.0.0.1:4173";
-await mkdir("output/playwright", { recursive: true });
-try {
-  const page = await browser.newPage({
-    viewport: { width: 1440, height: 1000 },
-    reducedMotion: "reduce",
-  });
-  const errors = [];
-  page.on("pageerror", (error) => errors.push(error.message));
-  page.on("response", (response) => {
-    if (response.status() >= 400)
-      errors.push(`${response.status()} ${response.url()}`);
-  });
-  await page.goto(url);
-  await page.getByRole("heading", { level: 1 }).waitFor();
-  await page.evaluate(() => document.fonts.ready);
-  assert.equal(await page.locator("article").count(), 3);
-  await page.screenshot({ path: "output/playwright/desktop.png" });
-  await page
-    .getByRole("button", { name: "Desktop Apps that run locally" })
-    .click();
-  assert.equal(await page.locator("article").count(), 1);
-  assert.equal(await page.locator("article h3").innerText(), "Orbit");
-  await page.getByRole("button", { name: "Data", exact: true }).click();
-  assert.equal(
-    await page.locator("article h3").innerText(),
-    "Business software",
-  );
-  await page.getByRole("button", { name: "Knowledge", exact: true }).click();
-  assert.equal(await page.locator("article h3").innerText(), "A second brain");
-  await page.getByText("Behind the work", { exact: true }).click();
-  assert.equal(await page.locator("details").getAttribute("open"), "");
-  await page.getByRole("button", { name: "All work", exact: true }).click();
-  assert.equal(await page.locator("article").count(), 3);
-  assert.equal(
-    await page
-      .getByRole("link", { name: "View repository" })
-      .getAttribute("href"),
-    "https://github.com/ngyinze/Orbit",
-  );
-  await page.goto(`${url}/#about`);
-  await page.reload();
-  await page
-    .getByRole("heading", {
-      name: "Understand the system. Then make it simpler.",
-    })
-    .waitFor();
-  await page.goto(url);
-  await page.keyboard.press("Tab");
-  assert.equal(
-    await page.evaluate(() => document.activeElement.textContent),
-    "Skip to work",
-  );
-  for (const width of [390, 320, 768, 1024, 1440]) {
-    await page.setViewportSize({ width, height: 900 });
-    assert.ok(
-      await page.evaluate(
-        () => document.documentElement.scrollWidth <= innerWidth,
-      ),
-      `Overflow at ${width}px`,
-    );
-  }
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.reload();
-  await page.getByRole("heading", { level: 1 }).waitFor();
-  await page.evaluate(() => document.fonts.ready);
-  await page.screenshot({
-    path: "output/playwright/mobile.png",
-    fullPage: true,
-  });
-  assert.equal(
-    await page
-      .locator(".orbit-dot")
-      .evaluate((el) => getComputedStyle(el).animationName),
-    "none",
-  );
-  assert.deepEqual(errors, []);
-  console.log(
-    "PASS: work map, every filter, details, links, refresh, keyboard entry, reduced motion, assets, and five responsive widths.",
-  );
-} finally {
-  await browser.close();
+assert.equal(new Set(projects.map((p) => p.id)).size, projects.length);
+for (const p of projects) {
+  assert.ok(areas.includes(p.area));
+  assert.ok(p.id && p.title && p.role && p.kind && p.summary);
 }
+assert.equal(
+  filterProjects(projects, "All", "  DELPHI ").at(0).id,
+  "business-software",
+);
+assert.equal(filterProjects(projects, "Knowledge", "Qt").length, 0);
+assert.equal(filterProjects(projects, "All", "no-such-project").length, 0);
+const collection = Array.from({ length: 120 }, (_, i) => ({
+  ...projects[i % 3],
+  id: "project-" + i,
+}));
+assert.equal(filterProjects(collection, "All").length, 120);
+for (const area of areas)
+  assert.equal(filterProjects(collection, area).length, 40);
+assert.equal(filterProjects(collection, "All", "Qt").length, 40);
+console.log(
+  "PASS: project identity, required content, combined filters, case-insensitive skill search, empty results, and a 120-project collection.",
+);
